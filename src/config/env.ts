@@ -19,6 +19,22 @@ const envSchema = z.object({
     .int()
     .positive()
     .default(5 * 1024 * 1024),
+  CLOUDINARY_CLOUD_NAME: z
+    .string()
+    .trim()
+    .optional()
+    .transform((val) => (val && val.length > 0 ? val : undefined)),
+  CLOUDINARY_API_KEY: z
+    .string()
+    .trim()
+    .optional()
+    .transform((val) => (val && val.length > 0 ? val : undefined)),
+  CLOUDINARY_API_SECRET: z
+    .string()
+    .trim()
+    .optional()
+    .transform((val) => (val && val.length > 0 ? val : undefined)),
+  CLOUDINARY_FOLDER: z.string().trim().min(1).default("adotajp"),
 })
 
 const parsedEnv = envSchema.safeParse(process.env)
